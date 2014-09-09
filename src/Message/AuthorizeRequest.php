@@ -35,13 +35,12 @@ class AuthorizeRequest extends AbstractRequest
 
     public function getData()
     {
-        $this->validate('amount', 'card');
-        $this->getCard()->validate();
+        $this->validate('amount', 'returnUrl');
 
         $data = array();
         $data['PSPID'] = $this->getApiLoginId();
         $data['ORDERID'] = $this->getOrderId();
-        $data['AMOUNT'] = $this->getAmount();
+        $data['AMOUNT'] = $this->getAmount() * 100;
         $data['CURRENCY'] = $this->getCurrency();
         $data['CN'] = $this->getCustomerName();
         $data['EMAIL'] = $this->getCustomerEmail();
@@ -51,8 +50,15 @@ class AuthorizeRequest extends AbstractRequest
         $data['OWNERTOWN'] = $this->getCustomerTown();
         $data['OWNERTELNO'] = $this->getCustomerTelephone();
 
-        $data['SHASIGN'] = sha1(implode(':', array($data['AMOUNT'],
-                $data['CURRENCY'], $data['LANGUAGE'], $data['ORDERID'], $data['PSPID'])));
+        /*
+         * Generate Security Hash
+         * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce/security-pre-payment-check
+        */
+        $data['SHASIGN'] = sha1('AMOUNT='.$data['AMOUNT'].$this->getSecretPass().
+                           'CURRENCY='.$data['CURRENCY'].$this->getSecretPass().
+                           'LANGUAGE='.$data['LANGUAGE'].$this->getSecretPass().
+                           'ORDERID='.$data['ORDERID'].$this->getSecretPass().
+                           'PSPID='.$data['PSPID'].$this->getSecretPass());
 
         return $data;
     }
