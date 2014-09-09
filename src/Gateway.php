@@ -19,19 +19,19 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters()
     {
         return array(
-            'PSPID' => '',
+            'pspId' => '',
             'testMode' => false,
         );
     }
 
     public function getApiLoginId()
     {
-        return $this->getParameter('PSPID');
+        return $this->getParameter('pspId');
     }
 
     public function setApiLoginId($value)
     {
-        return $this->setParameter('PSPID', $value);
+        return $this->setParameter('pspId', $value);
     }
 
     public function getTestMode()
