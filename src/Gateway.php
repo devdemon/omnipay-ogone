@@ -20,6 +20,8 @@ class Gateway extends AbstractGateway
     {
         return array(
             'pspId' => '',
+            'language' => 'en_US',
+            'secretPassphrase' => '',
             'testMode' => false,
         );
     }
@@ -42,6 +44,26 @@ class Gateway extends AbstractGateway
     public function setTestMode($value)
     {
         return $this->setParameter('testMode', $value);
+    }
+
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
+    }
+
+    public function getSecretPass()
+    {
+        return $this->getParameter('secretPassphrase');
+    }
+
+    public function setSecretPass($value)
+    {
+        return $this->setParameter('secretPassphrase', $value);
     }
 
     public function authorize(array $parameters = array())
