@@ -1,11 +1,11 @@
 <?php
 
-namespace Omnipay\OGone\Message;
+namespace Omnipay\Ogone\Message;
 
 /**
  * OGone Authorize Request
  */
-class OGONEAuthorizeRequest extends AbstractRequest
+class AuthorizeRequest extends AbstractRequest
 {
     protected $action = 'AUTH_ONLY';
 
