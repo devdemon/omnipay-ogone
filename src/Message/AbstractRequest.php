@@ -12,12 +12,12 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function getApiLoginId()
     {
-        return $this->getParameter('apiLoginId');
+        return $this->getParameter('pspId');
     }
 
     public function setApiLoginId($value)
     {
-        return $this->setParameter('apiLoginId', $value);
+        return $this->setParameter('pspId', $value);
     }
 
     public function getTransactionKey()
@@ -30,14 +30,14 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         return $this->setParameter('transactionKey', $value);
     }
 
-    public function getDeveloperMode()
+    public function getTestMode()
     {
-        return $this->getParameter('developerMode');
+        return $this->getParameter('testMode');
     }
 
-    public function setDeveloperMode($value)
+    public function setTestMode($value)
     {
-        return $this->setParameter('developerMode', $value);
+        return $this->setParameter('testMode', $value);
     }
 
     public function getCustomerId()
@@ -124,6 +124,6 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     public function getEndpoint()
     {
-        return $this->getDeveloperMode() ? $this->developerEndpoint : $this->liveEndpoint;
+        return $this->getTestMode() ? $this->developerEndpoint : $this->liveEndpoint;
     }
 }
