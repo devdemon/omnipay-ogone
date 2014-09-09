@@ -8,6 +8,7 @@ use Omnipay\Ogone\Message\AuthorizeRequest;
 
 /**
  * OGone Class
+ * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce
  */
 class Gateway extends AbstractGateway
 {
@@ -20,6 +21,7 @@ class Gateway extends AbstractGateway
     {
         return array(
             'pspId' => '',
+            'currency' => 'USD',
             'language' => 'en_US',
             'secretPassphrase' => '',
             'testMode' => false,
@@ -64,6 +66,16 @@ class Gateway extends AbstractGateway
     public function setSecretPass($value)
     {
         return $this->setParameter('secretPassphrase', $value);
+    }
+
+    public function getCurrency()
+    {
+        return $this->getParameter('currency');
+    }
+
+    public function setCurrency($value)
+    {
+        return $this->setParameter('currency', $value);
     }
 
     public function authorize(array $parameters = array())
