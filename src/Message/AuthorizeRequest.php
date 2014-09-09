@@ -62,4 +62,14 @@ class AuthorizeRequest extends AbstractRequest
 
         return $data;
     }
+
+    public function sendData($data)
+    {
+        return $this->response = new PurchaseResponse($this, $data);
+    }
+
+    public function getEndpoint()
+    {
+        return $this->getTestMode() ? $this->testEndpoint : $this->liveEndpoint;
+    }
 }
