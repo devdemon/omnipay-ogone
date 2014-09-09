@@ -40,16 +40,20 @@ class AuthorizeRequest extends AbstractRequest
 
         $data = array();
         $data['PSPID'] = $this->getApiLoginId();
-        $data['x_customer_ip'] = $this->getClientIp();
-        $data['x_card_num'] = $this->getCard()->getNumber();
-        $data['x_exp_date'] = $this->getCard()->getExpiryDate('my');
-        $data['x_card_code'] = $this->getCard()->getCvv();
-        $data['x_cust_id'] = $this->getCustomerId();
+        $data['ORDERID'] = $this->getOrderId();
+        $data['AMOUNT'] = $this->getAmount();
+        $data['CURRENCY'] = $this->getCurrency();
+        $data['CN'] = $this->getCustomerName();
+        $data['EMAIL'] = $this->getCustomerEmail();
+        $data['OWNERZIP'] = $this->getCustomerZip();
+        $data['OWNERADDRESS'] = $this->getCustomerAddress();
+        $data['OWNERCITY'] = $this->getCustomerCity();
+        $data['OWNERTOWN'] = $this->getCustomerTown();
+        $data['OWNERTELNO'] = $this->getCustomerTelephone();
 
-        if ($this->getTestMode()) {
-            $data['x_test_request'] = 'TRUE';
-        }
+        $data['SHASIGN'] = sha1(implode(':', array($data['AMOUNT'],
+                $data['CURRENCY'], $data['LANGUAGE'], $data['ORDERID'], $data['PSPID'])));
 
-        return array_merge($data, $this->getBillingData());
+        return $data;
     }
 }
