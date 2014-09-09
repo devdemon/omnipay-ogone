@@ -58,7 +58,7 @@ class Gateway extends AbstractGateway
 
     public function authorize(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\OGone\Message\OGONEAuthorizeRequest', $parameters);
+        return $this->createRequest('\Omnipay\Ogone\Message\AuthorizeRequest', $parameters);
     }
 
 }
