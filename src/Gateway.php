@@ -20,40 +20,28 @@ class Gateway extends AbstractGateway
     {
         return array(
             'PSPID' => '',
-            'transactionKey' => '',
             'testMode' => false,
-            'developerMode' => false,
         );
     }
 
     public function getApiLoginId()
     {
-        return $this->getParameter('apiLoginId');
+        return $this->getParameter('PSPID');
     }
 
     public function setApiLoginId($value)
     {
-        return $this->setParameter('apiLoginId', $value);
+        return $this->setParameter('PSPID', $value);
     }
 
-    public function getTransactionKey()
+    public function getTestMode()
     {
-        return $this->getParameter('transactionKey');
+        return $this->getParameter('testMode');
     }
 
-    public function setTransactionKey($value)
+    public function setTestMode($value)
     {
-        return $this->setParameter('transactionKey', $value);
-    }
-
-    public function getDeveloperMode()
-    {
-        return $this->getParameter('developerMode');
-    }
-
-    public function setDeveloperMode($value)
-    {
-        return $this->setParameter('developerMode', $value);
+        return $this->setParameter('testMode', $value);
     }
 
     public function authorize(array $parameters = array())
