@@ -21,19 +21,21 @@ class Gateway extends AbstractGateway
     {
         return array(
             'pspId' => '',
-            'currency' => 'USD',
+            /** Removed for now
+            'currencyCode' => 'USD',
             'language' => 'en_US',
-            'secretPassphrase' => '',
+            **/
+            'secret_code' => '',
             'testMode' => false,
         );
     }
 
-    public function getApiLoginId()
+    public function getPspId()
     {
         return $this->getParameter('pspId');
     }
 
-    public function setApiLoginId($value)
+    public function setPspId($value)
     {
         return $this->setParameter('pspId', $value);
     }
@@ -48,34 +50,14 @@ class Gateway extends AbstractGateway
         return $this->setParameter('testMode', $value);
     }
 
-    public function getLanguage()
+    public function getSecretCode()
     {
-        return $this->getParameter('language');
+        return $this->getParameter('secret_code');
     }
 
-    public function setLanguage($value)
+    public function setSecretCode($value)
     {
-        return $this->setParameter('language', $value);
-    }
-
-    public function getSecretPass()
-    {
-        return $this->getParameter('secretPassphrase');
-    }
-
-    public function setSecretPass($value)
-    {
-        return $this->setParameter('secretPassphrase', $value);
-    }
-
-    public function getCurrency()
-    {
-        return $this->getParameter('currency');
-    }
-
-    public function setCurrency($value)
-    {
-        return $this->setParameter('currency', $value);
+        return $this->setParameter('secret_code', $value);
     }
 
     public function authorize(array $parameters = array())
