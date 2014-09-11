@@ -38,27 +38,29 @@ class AuthorizeRequest extends AbstractRequest
         $this->validate('amount', 'returnUrl');
 
         $data = array();
-        $data['PSPID'] = $this->getApiLoginId();
-        $data['ORDERID'] = $this->getOrderId();
+        $data['PSPID'] = $this-g>getPspId();
+        $data['ORDERID'] = $this->getTransactionId();
         $data['AMOUNT'] = $this->getAmount() * 100;
         $data['CURRENCY'] = $this->getCurrency();
-        $data['CN'] = $this->getCustomerName();
-        $data['EMAIL'] = $this->getCustomerEmail();
-        $data['OWNERZIP'] = $this->getCustomerZip();
-        $data['OWNERADDRESS'] = $this->getCustomerAddress();
-        $data['OWNERCITY'] = $this->getCustomerCity();
-        $data['OWNERTOWN'] = $this->getCustomerTown();
-        $data['OWNERTELNO'] = $this->getCustomerTelephone();
+        $data['CN'] = $this->getName();
+        $data['EMAIL'] = $this->getEmail();
+        $data['OWNERADDRESS'] = $this->getAddress1();
+        $data['OWNERZIP'] = $this->getPostcode();
+        $data['OWNERTOWN'] = $this->getCity();
+        $data['OWNERCTY'] = $this->getCountry();
+        $data['OWNERTELNO'] = $this->getPhone();
 
         /*
          * Generate Security Hash
          * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce/security-pre-payment-check
         */
-        $data['SHASIGN'] = sha1('AMOUNT='.$data['AMOUNT'].$this->getSecretPass().
-                           'CURRENCY='.$data['CURRENCY'].$this->getSecretPass().
-                           'LANGUAGE='.$data['LANGUAGE'].$this->getSecretPass().
-                           'ORDERID='.$data['ORDERID'].$this->getSecretPass().
-                           'PSPID='.$data['PSPID'].$this->getSecretPass());
+        if ($this->getSecretCode()) {
+            $data['SHASIGN'] = sha1('AMOUNT='.$data['AMOUNT'].$this->getSecretCode().
+                               'CURRENCY='.$data['CURRENCY'].$this->getSecretCode().
+                               'LANGUAGE='.$data['LANGUAGE'].$this->getSecretCode().
+                               'ORDERID='.$data['ORDERID'].$this->getSecretCode().
+                               'PSPID='.$data['PSPID'].$this->getSecretCode());
+        }
 
         return $data;
     }
