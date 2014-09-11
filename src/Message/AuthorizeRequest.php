@@ -61,7 +61,7 @@ class AuthorizeRequest extends AbstractRequest
             $data['OWNERCTY'] = $this->getCard()->getCountry();
             $data['OWNERTELNO'] = $this->getCard()->getPhone();
         }
-
+        
         /*
          * Generate Security Hash
          * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce/security-pre-payment-check
@@ -83,7 +83,7 @@ class AuthorizeRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        return $this->response = new PurchaseResponse($this, $data);
+        return $this->response = new AuthorizeResponse($this, $data);
     }
 
     public function getEndpoint()
