@@ -9,16 +9,15 @@ use Omnipay\Common\Message\AbstractRequest;
  */
 class AuthorizeRequest extends AbstractRequest
 {
-
     protected $liveEndpoint = 'https://secure.ogone.com/ncol/prod/orderstandard(_utf8).asp';
     protected $developerEndpoint = 'https://secure.ogone.com/ncol/test/orderstandard(_utf8).asp';
 
-    public function getApiLoginId()
+    public function getPspId()
     {
         return $this->getParameter('pspId');
     }
 
-    public function setApiLoginId($value)
+    public function setPspId($value)
     {
         return $this->setParameter('pspId', $value);
     }
@@ -31,6 +30,16 @@ class AuthorizeRequest extends AbstractRequest
     public function setTestMode($value)
     {
         return $this->setParameter('testMode', $value);
+    }
+
+    public function getSecretCode()
+    {
+        return $this->getParameter('secret_code');
+    }
+
+    public function setSecretCode($value)
+    {
+        return $this->setParameter('secret_code', $value);
     }
 
     public function getData()
