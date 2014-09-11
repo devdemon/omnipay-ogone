@@ -51,13 +51,16 @@ class AuthorizeRequest extends AbstractRequest
         $data['ORDERID'] = $this->getTransactionId();
         $data['AMOUNT'] = $this->getAmount() * 100;
         $data['CURRENCY'] = $this->getCurrency();
-        $data['CN'] = $this->getName();
-        $data['EMAIL'] = $this->getEmail();
-        $data['OWNERADDRESS'] = $this->getAddress1();
-        $data['OWNERZIP'] = $this->getPostcode();
-        $data['OWNERTOWN'] = $this->getCity();
-        $data['OWNERCTY'] = $this->getCountry();
-        $data['OWNERTELNO'] = $this->getPhone();
+
+        if ($this->getCard()) {
+            $data['CN'] = $this->getCard()->getName();
+            $data['EMAIL'] = $this->getCard()->getEmail();
+            $data['OWNERADDRESS'] = $this->getCard()->getAddress1();
+            $data['OWNERZIP'] = $this->getCard()->getPostcode();
+            $data['OWNERTOWN'] = $this->getCard()->getCity();
+            $data['OWNERCTY'] = $this->getCard()->getCountry();
+            $data['OWNERTELNO'] = $this->getCard()->getPhone();
+        }
 
         /*
          * Generate Security Hash
@@ -65,8 +68,12 @@ class AuthorizeRequest extends AbstractRequest
         */
         if ($this->getSecretCode()) {
             $data['SHASIGN'] = sha1('AMOUNT='.$data['AMOUNT'].$this->getSecretCode().
+                               /** Removed for now
                                'CURRENCY='.$data['CURRENCY'].$this->getSecretCode().
                                'LANGUAGE='.$data['LANGUAGE'].$this->getSecretCode().
+                               **/
+                               'CURRENCY=USD'.$this->getSecretCode().
+                               'LANGUAGE=en_US'.$this->getSecretCode().
                                'ORDERID='.$data['ORDERID'].$this->getSecretCode().
                                'PSPID='.$data['PSPID'].$this->getSecretCode());
         }
