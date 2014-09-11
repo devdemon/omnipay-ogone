@@ -9,7 +9,7 @@ use Omnipay\Common\Message\RedirectResponseInterface;
  * Ogone Purchase Response
  * Based off the Wordpay Response
  */
-class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
+class AuthorizeResponse extends AbstractResponse implements RedirectResponseInterface
 {
     public function isSuccessful()
     {
