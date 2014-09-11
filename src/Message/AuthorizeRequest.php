@@ -47,7 +47,7 @@ class AuthorizeRequest extends AbstractRequest
         $this->validate('amount', 'returnUrl');
 
         $data = array();
-        $data['PSPID'] = $this-g>getPspId();
+        $data['PSPID'] = $this->getPspId();
         $data['ORDERID'] = $this->getTransactionId();
         $data['AMOUNT'] = $this->getAmount() * 100;
         $data['CURRENCY'] = $this->getCurrency();
