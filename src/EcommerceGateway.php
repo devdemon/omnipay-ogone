@@ -93,4 +93,9 @@ class EcommerceGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\Ogone\Message\EcommercePurchaseRequest', $parameters);
     }
+
+    public function completePurchase(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Ogone\Message\EcommerceCompletePurchaseRequest', $parameters);
+    }
 }
