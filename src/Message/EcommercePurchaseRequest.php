@@ -9,8 +9,8 @@ use Omnipay\Common\Message\AbstractRequest;
  */
 class EcommercePurchaseRequest extends AbstractRequest
 {
-    protected $liveEndpoint = 'https://secure.ogone.com/ncol/prod/orderstandard(_utf8).asp';
-    protected $developerEndpoint = 'https://secure.ogone.com/ncol/test/orderstandard(_utf8).asp';
+    protected $liveEndpoint = 'https://secure.ogone.com/ncol/prod/orderstandard_utf8.asp';
+    protected $testEndpoint = 'https://secure.ogone.com/ncol/test/orderstandard_utf8.asp';
 
     public function getPspId()
     {
