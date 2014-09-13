@@ -59,7 +59,7 @@ class EcommercePurchaseRequest extends AbstractRequest
         $data = array();
         $data['PSPID'] = $this->getPspId();
         $data['ORDERID'] = $this->getTransactionId();
-        $data['AMOUNT'] = $this->getAmount() * 100;
+        $data['AMOUNT'] = number_format($this->getAmount() * 100, 0);
         $data['CURRENCY'] = $this->getCurrency();
 
         //----------------------------------------
