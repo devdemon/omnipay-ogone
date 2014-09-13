@@ -32,14 +32,24 @@ class EcommercePurchaseRequest extends AbstractRequest
         return $this->setParameter('testMode', $value);
     }
 
-    public function getSecretCode()
+    public function getShaIn()
     {
-        return $this->getParameter('secret_code');
+        return $this->getParameter('sha_in');
     }
 
-    public function setSecretCode($value)
+    public function setShaIn($value)
     {
-        return $this->setParameter('secret_code', $value);
+        return $this->setParameter('sha_in', $value);
+    }
+
+    public function getShaAlgo()
+    {
+        return $this->getParameter('sha_algo');
+    }
+
+    public function setShaAlgo($value)
+    {
+        return $this->setParameter('sha_algo', $value);
     }
 
     public function getData()
