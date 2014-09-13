@@ -60,6 +60,9 @@ class EcommercePurchaseRequest extends AbstractRequest
         //$data['EXCEPTIONURL'] = $this->getCancelUrl();
         //$data['CANCELURL'] = $this->getCancelUrl();
 
+        //----------------------------------------
+        // Optional
+        //----------------------------------------
         if ($this->getCard()) {
             $data['CN'] = $this->getCard()->getName();
             $data['EMAIL'] = $this->getCard()->getEmail();
@@ -70,21 +73,46 @@ class EcommercePurchaseRequest extends AbstractRequest
             $data['OWNERTELNO'] = $this->getCard()->getPhone();
         }
 
-        /*
-         * Generate Security Hash
-         * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce/security-pre-payment-check
-        */
-        if ($this->getSecretCode()) {
-            $data['SHASIGN'] = sha1('AMOUNT='.$data['AMOUNT'].$this->getSecretCode().
-                               /** Removed for now
-                               'CURRENCY='.$data['CURRENCY'].$this->getSecretCode().
-                               'LANGUAGE='.$data['LANGUAGE'].$this->getSecretCode().
-                               **/
-                               'CURRENCY=USD'.$this->getSecretCode().
-                               'LANGUAGE=en_US'.$this->getSecretCode().
-                               'ORDERID='.$data['ORDERID'].$this->getSecretCode().
-                               'PSPID='.$data['PSPID'].$this->getSecretCode());
+        //----------------------------------------
+        // SHAIN Secret Code (Required)
+        //----------------------------------------
+        $shaIn = $this->getShaIn();
+
+        if (!$shaIn) {
+            throw new InvalidRequestException('Missing required sha_in');
         }
+
+        // All parameters have to be arranged alphabetically
+        ksort($data);
+        array_map('trim', $data);
+
+        //----------------------------------------
+        // Generate Security Hash
+        // http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce/security-pre-payment-check
+        //----------------------------------------
+        $shaString = '';
+
+        foreach ($data as $key => $val) {
+            // Parameters that do not have a value should NOT be included in the string to hash
+            if (!$val) continue;
+
+            $shaString .= "{$key}=$val{$shaIn}";
+        }
+
+        // All three SHA algo are supported
+        switch ($this->getShaAlgo()) {
+            case 'sha256':
+                $shaSign = hash('sha256', $shaString);
+                break;
+            case 'sha512':
+                $shaSign = hash('sha512', $shaString);
+                break;
+            default:
+                $shaSign = sha1($shaString);
+                break;
+        }
+
+        $data['SHASIGN'] = $shaSign;
 
         return $data;
     }
