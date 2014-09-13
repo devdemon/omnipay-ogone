@@ -22,6 +22,16 @@ class EcommercePurchaseRequest extends AbstractRequest
         return $this->setParameter('pspId', $value);
     }
 
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
+    }
+
     public function getTestMode()
     {
         return $this->getParameter('testMode');
@@ -61,6 +71,7 @@ class EcommercePurchaseRequest extends AbstractRequest
         $data['ORDERID'] = $this->getTransactionId();
         $data['AMOUNT'] = number_format($this->getAmount() * 100, 0);
         $data['CURRENCY'] = $this->getCurrency();
+        $data['LANGUAGE'] = $this->getLanguage();
 
         //----------------------------------------
         // Return URLs

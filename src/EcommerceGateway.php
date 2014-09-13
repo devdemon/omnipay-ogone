@@ -23,10 +23,7 @@ class EcommerceGateway extends AbstractGateway
             'pspId' => '',
             'sha_in' => '',
             'sha_algo' => 'sha1', // sha1, sha256, sha512
-            /** Removed for now
-            'currencyCode' => 'USD',
             'language' => 'en_US',
-            **/
             'secret_code' => '',
             'testMode' => false,
         );
@@ -60,6 +57,16 @@ class EcommerceGateway extends AbstractGateway
     public function setShaAlgo($value)
     {
         return $this->setParameter('sha_algo', $value);
+    }
+
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
     }
 
     public function getTestMode()
