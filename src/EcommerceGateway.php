@@ -21,6 +21,8 @@ class EcommerceGateway extends AbstractGateway
     {
         return array(
             'pspId' => '',
+            'sha_in' => '',
+            'sha_algo' => 'sha1', // sha1, sha256, sha512
             /** Removed for now
             'currencyCode' => 'USD',
             'language' => 'en_US',
@@ -38,6 +40,26 @@ class EcommerceGateway extends AbstractGateway
     public function setPspId($value)
     {
         return $this->setParameter('pspId', $value);
+    }
+
+    public function getShaIn()
+    {
+        return $this->getParameter('sha_in');
+    }
+
+    public function setShaIn($value)
+    {
+        return $this->setParameter('sha_in', $value);
+    }
+
+    public function getShaAlgo()
+    {
+        return $this->getParameter('sha_algo');
+    }
+
+    public function setShaAlgo($value)
+    {
+        return $this->setParameter('sha_algo', $value);
     }
 
     public function getTestMode()
@@ -64,5 +86,4 @@ class EcommerceGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\Ogone\Message\EcommercePurchaseRequest', $parameters);
     }
-
 }
