@@ -52,6 +52,14 @@ class EcommercePurchaseRequest extends AbstractRequest
         $data['AMOUNT'] = $this->getAmount() * 100;
         $data['CURRENCY'] = $this->getCurrency();
 
+        //----------------------------------------
+        // Return URLs
+        //----------------------------------------
+        $data['ACCEPTURL'] = $this->getReturnUrl();
+        $data['DECLINEURL'] = $this->getCancelUrl();
+        //$data['EXCEPTIONURL'] = $this->getCancelUrl();
+        //$data['CANCELURL'] = $this->getCancelUrl();
+
         if ($this->getCard()) {
             $data['CN'] = $this->getCard()->getName();
             $data['EMAIL'] = $this->getCard()->getEmail();
