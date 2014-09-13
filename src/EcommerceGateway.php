@@ -10,11 +10,11 @@ use Omnipay\Ogone\Message\AuthorizeRequest;
  * OGone Class
  * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce
  */
-class Gateway extends AbstractGateway
+class EcommerceGateway extends AbstractGateway
 {
     public function getName()
     {
-        return 'Ogone';
+        return 'Ogone - e-Commerce';
     }
 
     public function getDefaultParameters()
@@ -60,9 +60,9 @@ class Gateway extends AbstractGateway
         return $this->setParameter('secret_code', $value);
     }
 
-    public function authorize(array $parameters = array())
+    public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Ogone\Message\AuthorizeRequest', $parameters);
+        return $this->createRequest('\Omnipay\Ogone\Message\EcommercePurchaseRequest', $parameters);
     }
 
 }

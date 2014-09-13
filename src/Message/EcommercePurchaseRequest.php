@@ -7,7 +7,7 @@ use Omnipay\Common\Message\AbstractRequest;
 /**
  * OGone Authorize Request
  */
-class AuthorizeRequest extends AbstractRequest
+class EcommercePurchaseRequest extends AbstractRequest
 {
     protected $liveEndpoint = 'https://secure.ogone.com/ncol/prod/orderstandard(_utf8).asp';
     protected $developerEndpoint = 'https://secure.ogone.com/ncol/test/orderstandard(_utf8).asp';
@@ -61,7 +61,7 @@ class AuthorizeRequest extends AbstractRequest
             $data['OWNERCTY'] = $this->getCard()->getCountry();
             $data['OWNERTELNO'] = $this->getCard()->getPhone();
         }
-        
+
         /*
          * Generate Security Hash
          * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce/security-pre-payment-check
@@ -83,7 +83,7 @@ class AuthorizeRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        return $this->response = new AuthorizeResponse($this, $data);
+        return $this->response = new EcommercePurchaseResponse($this, $data);
     }
 
     public function getEndpoint()
