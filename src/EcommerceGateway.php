@@ -10,21 +10,20 @@ use Omnipay\Ogone\Message\AuthorizeRequest;
  * OGone Class
  * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce
  */
-class Gateway extends AbstractGateway
+class EcommerceGateway extends AbstractGateway
 {
     public function getName()
     {
-        return 'Ogone';
+        return 'Ogone - e-Commerce';
     }
 
     public function getDefaultParameters()
     {
         return array(
             'pspId' => '',
-            /** Removed for now
-            'currencyCode' => 'USD',
+            'sha_in' => '',
+            'sha_algo' => 'sha1', // sha1, sha256, sha512
             'language' => 'en_US',
-            **/
             'secret_code' => '',
             'testMode' => false,
         );
@@ -38,6 +37,36 @@ class Gateway extends AbstractGateway
     public function setPspId($value)
     {
         return $this->setParameter('pspId', $value);
+    }
+
+    public function getShaIn()
+    {
+        return $this->getParameter('sha_in');
+    }
+
+    public function setShaIn($value)
+    {
+        return $this->setParameter('sha_in', $value);
+    }
+
+    public function getShaAlgo()
+    {
+        return $this->getParameter('sha_algo');
+    }
+
+    public function setShaAlgo($value)
+    {
+        return $this->setParameter('sha_algo', $value);
+    }
+
+    public function getLanguage()
+    {
+        return $this->getParameter('language');
+    }
+
+    public function setLanguage($value)
+    {
+        return $this->setParameter('language', $value);
     }
 
     public function getTestMode()
@@ -60,9 +89,13 @@ class Gateway extends AbstractGateway
         return $this->setParameter('secret_code', $value);
     }
 
-    public function authorize(array $parameters = array())
+    public function purchase(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Ogone\Message\AuthorizeRequest', $parameters);
+        return $this->createRequest('\Omnipay\Ogone\Message\EcommercePurchaseRequest', $parameters);
     }
 
+    public function completePurchase(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Ogone\Message\EcommerceCompletePurchaseRequest', $parameters);
+    }
 }

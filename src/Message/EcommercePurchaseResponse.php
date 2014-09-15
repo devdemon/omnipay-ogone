@@ -5,11 +5,7 @@ namespace Omnipay\Ogone\Message;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 
-/**
- * Ogone Purchase Response
- * Based off the Wordpay Response
- */
-class AuthorizeResponse extends AbstractResponse implements RedirectResponseInterface
+class EcommercePurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {
     public function isSuccessful()
     {
@@ -23,16 +19,16 @@ class AuthorizeResponse extends AbstractResponse implements RedirectResponseInte
 
     public function getRedirectUrl()
     {
-        return $this->getRequest()->getEndpoint().'?'.http_build_query($this->data);
+        return $this->getRequest()->getEndpoint();
     }
 
     public function getRedirectMethod()
     {
-        return 'GET';
+        return 'POST';
     }
 
     public function getRedirectData()
     {
-        return null;
+        return $this->getData();
     }
 }
