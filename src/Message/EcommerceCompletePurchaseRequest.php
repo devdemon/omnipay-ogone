@@ -18,7 +18,7 @@ class EcommerceCompletePurchaseRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        return $this->response = new CompletePurchaseResponse($this, $data);
+        return $this->response = new EcommerceCompletePurchaseResponse($this, $data);
     }
 
 }
