@@ -13,11 +13,6 @@ class EcommerceCompletePurchaseRequest extends AbstractRequest
 
     public function getData()
     {
-        $callbackPW = (string) $this->httpRequest->request->get('callbackPW');
-        if ($callbackPW !== $this->getCallbackPassword()) {
-            throw new InvalidResponseException("Invalid callback password");
-        }
-
         return $this->httpRequest->request->all();
     }
 
