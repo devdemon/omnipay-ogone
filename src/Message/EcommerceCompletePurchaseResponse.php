@@ -12,17 +12,17 @@ class EcommerceCompletePurchaseResponse extends AbstractResponse
 
     public function isSuccessful()
     {
-        return isset($this->data['transStatus']) && 'Y' === $this->data['transStatus'];
+        return isset($this->data['STATUS']) && '5' === $this->data['STATUS'];
     }
 
     public function getTransactionReference()
     {
-        return isset($this->data['transId']) ? $this->data['transId'] : null;
+        return isset($this->data['ACCEPTANCE']) ? $this->data['ACCEPTANCE'] : null;
     }
 
-    public function getMessage()
+    public function getStatus()
     {
-        return isset($this->data['rawAuthMessage']) ? $this->data['rawAuthMessage'] : null;
+        return isset($this->data['STATUS']) ? $this->data['STATUS'] : null;
     }
 
 }
