@@ -15,7 +15,7 @@ class EcommerceCompletePurchaseResponse extends AbstractResponse
         /*
          * Check if the Status is either 5/6/9
          */
-        return isset($this->data['STATUS']) && str_replace(array(5,4,9), '', $this->data['STATUS']) );
+        return isset($this->data['STATUS']) && str_replace(array(5,4,9), '', $this->data['STATUS']);
     }
 
     public function getTransactionReference()
