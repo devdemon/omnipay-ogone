@@ -1,0 +1,36 @@
+{
+    "name": "omnipay/ogone",
+    "type": "library",
+    "description": "Ogone gateway for Omnipay payment processing library",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment",
+        "ogone",
+        "purchase"
+    ],
+    "homepage": "https://github.com/devdemon/omnipay-ogone",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "DevDemon",
+            "homepage": "http://www.devdemon.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\Ogone\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}
