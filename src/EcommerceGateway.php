@@ -10,7 +10,7 @@ use Omnipay\Ogone\Message\AuthorizeRequest;
  * OGone Class
  * http://payment-services.ingenico.com/ogone/support/guides/integration%20guides/e-commerce
  */
-class Gateway extends AbstractGateway
+class EcommerceGateway extends AbstractGateway
 {
     public function getName()
     {
