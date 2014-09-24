@@ -72,14 +72,16 @@ class EcommercePurchaseRequest extends AbstractRequest
         $data['AMOUNT'] = number_format($this->getAmount() * 100, 0, '', '');
         $data['CURRENCY'] = $this->getCurrency();
         $data['LANGUAGE'] = $this->getLanguage();
+        $data['OPERATION'] = 'SAL';
 
         //----------------------------------------
         // Return URLs
         //----------------------------------------
         $data['ACCEPTURL'] = $this->getReturnUrl();
         $data['DECLINEURL'] = $this->getCancelUrl();
+        $data['CANCELURL'] = $this->getCancelUrl();
         //$data['EXCEPTIONURL'] = $this->getCancelUrl();
-        //$data['CANCELURL'] = $this->getCancelUrl();
+
 
         //----------------------------------------
         // Optional
