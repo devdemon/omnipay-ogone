@@ -9,21 +9,23 @@ use Omnipay\Common\Message\AbstractResponse;
  */
 class EcommerceCompletePurchaseResponse extends AbstractResponse
 {
-
     public function isSuccessful()
     {
-        $status = $this->httpRequest->query->get('STATUS');
+        if (isset($this->data['STATUS']) === false) {
+            return false;
+        } else {
+            // Check if the Status is either 5/6/9
+            if (str_replace(array(5,4,9), '', $this->data['STATUS']) == false) {
+                return true;
+            }
+        }
 
-        if (!$status) return false;
-
-        /*
-         * Check if the Status is either 5/6/9
-         */
-        return (str_replace(array(5,4,9), '', $status) == false);
+        return false;
     }
 
     public function getTransactionReference()
     {
-        return $this->httpRequest->query->get('ACCEPTANCE');
+        return isset($this->data['ACCEPTANCE']) ? $this->data['ACCEPTANCE'] : null;
     }
+
 }
