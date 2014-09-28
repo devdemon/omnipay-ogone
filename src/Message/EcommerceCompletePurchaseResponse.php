@@ -12,20 +12,18 @@ class EcommerceCompletePurchaseResponse extends AbstractResponse
 
     public function isSuccessful()
     {
+        $status = $this->httpRequest->query->get('STATUS');
+
+        if (!$status) return false;
+
         /*
          * Check if the Status is either 5/6/9
          */
-        return isset($this->data['STATUS']) && str_replace(array(5,4,9), '', $this->data['STATUS']);
+        return (str_replace(array(5,4,9), '', $status) == false);
     }
 
     public function getTransactionReference()
     {
-        return isset($this->data['ACCEPTANCE']) ? $this->data['ACCEPTANCE'] : null;
+        return $this->httpRequest->query->get('ACCEPTANCE');
     }
-
-    public function getStatus()
-    {
-        return isset($this->data['STATUS']) ? $this->data['STATUS'] : null;
-    }
-
 }
