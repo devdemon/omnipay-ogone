@@ -22,6 +22,7 @@ class EcommerceGateway extends AbstractGateway
         return array(
             'pspId' => '',
             'sha_in' => '',
+            'sha_out' => '',
             'sha_algo' => 'sha1', // sha1, sha256, sha512
             'language' => 'en_US',
             'secret_code' => '',
@@ -47,6 +48,16 @@ class EcommerceGateway extends AbstractGateway
     public function setShaIn($value)
     {
         return $this->setParameter('sha_in', $value);
+    }
+
+    public function getShaOut()
+    {
+        return $this->getParameter('sha_out');
+    }
+
+    public function setShaOut($value)
+    {
+        return $this->setParameter('sha_out', $value);
     }
 
     public function getShaAlgo()
