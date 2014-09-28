@@ -13,7 +13,7 @@ class EcommerceCompletePurchaseRequest extends AbstractRequest
 
     public function getData()
     {
-        return $this->httpRequest->request->all();
+        return $this->httpRequest->query->all();
     }
 
     public function sendData($data)
