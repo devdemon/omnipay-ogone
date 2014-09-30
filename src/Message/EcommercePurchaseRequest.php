@@ -82,6 +82,16 @@ class EcommercePurchaseRequest extends AbstractRequest
         $data['CANCELURL'] = $this->getCancelUrl();
         //$data['EXCEPTIONURL'] = $this->getCancelUrl();
 
+        //----------------------------------------
+        // Force Payment Method
+        //----------------------------------------
+        if ($this->httpRequest->request->get('ogone_pm')) {
+            $data['PM'] = $this->httpRequest->request->get('ogone_pm');
+        }
+
+        if ($this->httpRequest->request->get('ogone_brand')) {
+            $data['BRAND'] = $this->httpRequest->request->get('ogone_brand');
+        }
 
         //----------------------------------------
         // Optional
