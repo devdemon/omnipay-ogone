@@ -21,11 +21,10 @@ class EcommerceGateway extends AbstractGateway
     {
         return array(
             'pspId' => '',
-            'sha_in' => '',
-            'sha_out' => '',
-            'sha_algo' => 'sha1', // sha1, sha256, sha512
+            'shaIn' => '',
+            'shaOut' => '',
+            'shaAlgo' => 'sha1', // sha1, sha256, sha512
             'language' => 'en_US',
-            'secret_code' => '',
             'testMode' => false,
         );
     }
@@ -42,32 +41,32 @@ class EcommerceGateway extends AbstractGateway
 
     public function getShaIn()
     {
-        return $this->getParameter('sha_in');
+        return $this->getParameter('shaIn');
     }
 
     public function setShaIn($value)
     {
-        return $this->setParameter('sha_in', $value);
+        return $this->setParameter('shaIn', $value);
     }
 
     public function getShaOut()
     {
-        return $this->getParameter('sha_out');
+        return $this->getParameter('shaOut');
     }
 
     public function setShaOut($value)
     {
-        return $this->setParameter('sha_out', $value);
+        return $this->setParameter('shaOut', $value);
     }
 
     public function getShaAlgo()
     {
-        return $this->getParameter('sha_algo');
+        return $this->getParameter('shaAlgo');
     }
 
     public function setShaAlgo($value)
     {
-        return $this->setParameter('sha_algo', $value);
+        return $this->setParameter('shaAlgo', $value);
     }
 
     public function getLanguage()
@@ -88,16 +87,6 @@ class EcommerceGateway extends AbstractGateway
     public function setTestMode($value)
     {
         return $this->setParameter('testMode', $value);
-    }
-
-    public function getSecretCode()
-    {
-        return $this->getParameter('secret_code');
-    }
-
-    public function setSecretCode($value)
-    {
-        return $this->setParameter('secret_code', $value);
     }
 
     public function purchase(array $parameters = array())

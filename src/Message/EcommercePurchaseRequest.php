@@ -44,22 +44,22 @@ class EcommercePurchaseRequest extends AbstractRequest
 
     public function getShaIn()
     {
-        return $this->getParameter('sha_in');
+        return $this->getParameter('shaIn');
     }
 
     public function setShaIn($value)
     {
-        return $this->setParameter('sha_in', $value);
+        return $this->setParameter('shaIn', $value);
     }
 
     public function getShaAlgo()
     {
-        return $this->getParameter('sha_algo');
+        return $this->getParameter('shaAlgo');
     }
 
     public function setShaAlgo($value)
     {
-        return $this->setParameter('sha_algo', $value);
+        return $this->setParameter('shaAlgo', $value);
     }
 
     public function getData()
@@ -112,7 +112,7 @@ class EcommercePurchaseRequest extends AbstractRequest
         $shaIn = $this->getShaIn();
 
         if (!$shaIn) {
-            throw new InvalidRequestException('Missing required sha_in');
+            throw new InvalidRequestException('Missing required shaIn');
         }
 
         // All parameters have to be arranged alphabetically
